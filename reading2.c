@@ -16,7 +16,7 @@ int main(){
 
         n1 = fgets(line1, sizeof(line1), input);
         n2 = fgets(line2, sizeof(line2), input2);
-        if((n1 == NULL)||(n2 == NULL)){
+        if((n1 == NULL) && (n2 == NULL)){
             break;
         }
         int len = strlen(line1);
