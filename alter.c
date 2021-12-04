@@ -12,20 +12,24 @@ int main(){
         exit(1);
     }
     while(1){
-        n1 = fgets(line1, sizeof(line1), input);
-        n2 = fgets(line2, sizeof(line2), input2);
-        if((n1 == NULL) && (n2 == NULL)){
-            break;
+        for(int i = 0; i < strlen(line1); i++){
+            n1 = fgets(line1, sizeof(line1), input);
+            if (n1 == NULL){
+                break;
+            }
+            printf("%s", n1);
         }
         int len = strlen(line1);
         if (len > 0 && line1[len - 1] == '\n'){
-            line1[len - 1] = 0;
+            line1[len-1] = 0;
         }
-        if (n1 == NULL){
-            *n1 = '\0';
+        for(int i = 0; i < strlen(line2) - 1; i++){
+            n2 = fgets(line2, sizeof(line2), input2);
+            if (n2 == NULL){
+                break;
+            }
+            printf("%s", n2);
         }
-        printf("%s", n1);
-        printf("%s", n2);
     }
     fclose(input);
     fclose(input2);
