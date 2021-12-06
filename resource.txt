@@ -1,0 +1,8 @@
+https://www.jonathan-petitcolas.com/2017/12/28/converting-image-to-ascii-art.html
+https://stackoverflow.com/questions/54173733/convert-rgb-to-grayscale-in-bare-c
+https://www.studytonight.com/c-programs/c-program-to-merge-two-arrays
+/* moving cursor */
+https://stackoverflow.com/questions/33677992/how-to-move-cursor-back-to-the-first-line-in-c
+/* string function */
+https://www.programiz.com/c-programming/library-function/string.h/strcat
+https://www.tutorialspoint.com/c_standard_library/c_function_strtok.htm
