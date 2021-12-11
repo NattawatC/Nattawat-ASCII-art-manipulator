@@ -2,9 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+struct Image{
+    int height;
+    int width;
+    char* data;
+};
+
 int main(){
     FILE *input = fopen("C:\\Users\\USER\\Desktop\\input.txt","r");
     FILE *input2 = fopen("C:\\Users\\USER\\Desktop\\after.txt","r");
+    FILE *outfile = NULL;
     // char line1[50],line2[50];
     // char *n1,*n2;
     char *ptr, *ptr2;
@@ -13,14 +20,16 @@ int main(){
         printf("Can't find a File");
         exit(1);
     }
-    fseek(input, 0, SEEK_END);
-    int size = ftell(input);
-    fseek(input, 0, SEEK_SET);
 
-    fseek(input2, 0, SEEK_END);
-    int size2 = ftell(input2);
+    fseek(input, 0, SEEK_END);      //set the end of file
+    int size = ftell(input);    //find the size of file(input)
+    fseek(input, 0, SEEK_SET);      //set to beginning of the file
+
+    fseek(input2, 0, SEEK_END);     
+    int size2 = ftell(input2);    //find the size of file(input2)
     fseek(input2, 0, SEEK_SET);
-    int size_t = size + size2;
+
+    int size_t = size + size2;      //total file's size
 
     ptr = (char*)malloc(size);
     ptr2 = (char*)malloc(size2);
@@ -38,15 +47,16 @@ int main(){
     ptr3 = (char*)realloc(ptr3, size_t);
     memcpy(ptr3 + (size_t), ptr2, size_t);
 
-    // memcpy(ptr3 + (size_t * 2),ptr3, size_t * 2);
-    strcat(ptr3, ptr3 + (size_t));
-    puts(ptr3);
+    outfile = fopen("Final_char.txt", "w");
+    fwrite(ptr3, 1, sizeof(size) - 1 , outfile);
+    fwrite(ptr3 + size_t, 1, size_t, outfile);
 
     free(ptr);
     free(ptr2);
     free(ptr3);
     fclose(input);
     fclose(input2);
+    fclose(outfile);
     return 0;
 }
 
