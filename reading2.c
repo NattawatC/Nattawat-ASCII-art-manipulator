@@ -263,7 +263,11 @@ int main(){
     memcpy(ptr3, ptr, size_t);      //copy content ptr into ptr3
 
     ptr3 = (char*)realloc(ptr3, size_t);
-    memcpy(ptr3 + (size_t), ptr2, size_t);      //copy content ptr2 into ptr3 + 10(new_dest)
+    memcpy(ptr3 + strlen(ptr3), ptr2, size_t);      //copy content ptr2 into ptr3 + 10(new_dest)
+
+    for(int i = 0; i < strlen(ptr3); i++){       //char checking
+        printf("%c", *(ptr3 + i));
+    }
 
 //<still wrong>
     outfile = fopen("Final_char.txt", "w");     //new file to write

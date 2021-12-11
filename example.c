@@ -45,7 +45,7 @@ int main(){
     ptr3 = (char*)realloc(ptr3, size_t);
     memcpy(ptr3 + (size_t), ptr2, size_t);      //copy content ptr2 into ptr3 + 10(new_dest)
 
-//<still wrong> a freaking shortcut!!
+//<still wrong> a shortcut!! --version
     outfile = fopen("Final_char.txt", "w");     //new file to write
     fwrite(ptr3, 1, sizeof(size), outfile);        //write ptr3
     fseek(outfile, 2, SEEK_SET);
