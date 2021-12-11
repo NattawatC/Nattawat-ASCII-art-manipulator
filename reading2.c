@@ -2,18 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct Image{
+struct Image{       //still don't know how to use this!!
     int height;
     int width;
     char* data;
 };
 
 int main(){
-    FILE *input = fopen("C:\\Users\\USER\\Desktop\\input.txt","r");
-    FILE *input2 = fopen("C:\\Users\\USER\\Desktop\\after.txt","r");
+    FILE *input = fopen("char.txt","r");
+    FILE *input2 = fopen("char2.txt","r");
     FILE *outfile = NULL;
-    // char line1[50],line2[50];
-    // char *n1,*n2;
     char *ptr, *ptr2;
 
     if((input == NULL)||(input2 == NULL)){
@@ -34,22 +32,23 @@ int main(){
     ptr = (char*)malloc(size);
     ptr2 = (char*)malloc(size2);
     
-    int arr1 = fread(ptr, 1, size, input);
-    int arr2 = fread(ptr2, 1, size2, input2);
-    if((arr1 != size) || (arr2 != size2)){
+    int arr1 = fread(ptr, 1, size, input);      //put char into pointer(ptr)
+    int arr2 = fread(ptr2, 1, size2, input2);       //put char2 into pointer(ptr2)
+    if((arr1 != size) || (arr2 != size2)){      //error checking
         printf("ERROR\n");
     }
 
     char *ptr3;
     ptr3 = (char*)malloc(size_t);
-    memcpy(ptr3, ptr, size_t);
+    memcpy(ptr3, ptr, size_t);      //copy content ptr into ptr3
 
     ptr3 = (char*)realloc(ptr3, size_t);
-    memcpy(ptr3 + (size_t), ptr2, size_t);
+    memcpy(ptr3 + (size_t), ptr2, size_t);      //copy content ptr2 into ptr3 + 10(new_dest)
 
-    outfile = fopen("Final_char.txt", "w");
-    fwrite(ptr3, 1, sizeof(size) - 1 , outfile);
-    fwrite(ptr3 + size_t, 1, size_t, outfile);
+//<still wrong>
+    outfile = fopen("Final_char.txt", "w");     //new file to write
+    fwrite(ptr3, 1, sizeof(size) - 1 , outfile);        //write ptr3
+    fwrite(ptr3 + size_t, 1, size_t, outfile);      //write ptr3 + 10
 
     free(ptr);
     free(ptr2);
@@ -59,36 +58,3 @@ int main(){
     fclose(outfile);
     return 0;
 }
-
-
-//    while(1){
-//         n1 = fgets(line1, sizeof(line1), input);
-//         n2 = fgets(line2, sizeof(line2), input2);
-//         if((n1 == NULL) && (n2 == NULL)){
-//             break;
-//         }
-
-//         ptr = n1;
-//         for(int i = 0; i < strlen(n1); i++){
-//             token[strlen(n1) - (i - 1)] = '\0';
-//         }
-        
-//         ptr2 = n2;
-//         for(int i = 0; i < strlen(n2); i++){
-//             token2[strlen(n2) - (i - 2)] = '\0';
-//         }
-
-//         strcat(token, token2);
-//         puts(token);
-//         // puts(token2);
-//         // printf("%s%s\n", ptr, ptr2);
-// //        int len = strlen(line1);
-// //        if (len > 0 && line1[len - 1] == '\n'){
-// //            line1[len - 1] = 0;
-// //        }
-//     }
-//     free(token);
-//     free(token2);
-//     fclose(input);
-//     fclose(input2);
-//     return 0;
