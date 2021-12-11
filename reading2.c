@@ -45,15 +45,25 @@ int main(){
     ptr3 = (char*)realloc(ptr3, size_t);
     memcpy(ptr3 + strlen(ptr3), ptr2, size_t);      //copy content ptr2 into ptr3 + 10(new_dest)
 
-    for(int i = 0; i < strlen(ptr3); i++){       //char checking
-        printf("%c", *(ptr3 + i));
-    }
+    // for(int i = 0; i < strlen(ptr3); i++){       //char checking
+    //     printf("%c", *(ptr3 + i));
+    // }
 
 //<still wrong>
     outfile = fopen("Final_char.txt", "w");     //new file to write
-    fwrite(ptr3, 1, sizeof(size) + 1, outfile);        //write ptr3
-    fwrite(ptr3 + size_t, 1, size_t, outfile);      //write ptr3 + 10
+    for(int i = 0; i < strlen(ptr3); i++){
+        if (*ptr3 != *(ptr + i)){
+            fseek(outfile, 2, SEEK_SET);
+            fwrite(ptr3 + 5, 1, sizeof(ptr3) - 5, outfile);
+        }
+        fseek(outfile, 0, SEEK_END);
+        fprintf(outfile, "%c", *(ptr3 + i));
+        if (i > size2 - 3){
+            goto done;
+        }
+    }
 
+done:
     free(ptr);
     free(ptr2);
     free(ptr3);
@@ -61,4 +71,4 @@ int main(){
     fclose(input2);
     fclose(outfile);
     return 0;
-}
+} 
