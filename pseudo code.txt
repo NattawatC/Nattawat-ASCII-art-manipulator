@@ -1,6 +1,6 @@
 Declare Filename
-	declare pointer1 open file1(char.txt) to be read:
-	declare pointer2 open file2(char2.txt) to be read:
+	declare pointer1 open and read file1(char.txt):
+	declare pointer2 open and read file2(char2.txt):
 	declare pointer3(output) = NULL
 	declare 2 char pointers for some space
 			
@@ -35,7 +35,7 @@ Declare Filename
 	giving char pointer4 a memory of size_t
 	copy memory from pointer2 into pointer4 with size of size_t
 
-	open file name(Final_char.txt) to write with pointer3(output)
+	open file name(Final_char.txt) and write with pointer3(output)
 	write a file using pointer(fwrite)
 
 	free(pointer1)
