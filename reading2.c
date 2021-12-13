@@ -3,12 +3,12 @@
 #include <string.h>
 
 int main(){
-    FILE *input = fopen("char.txt","r");
-    FILE *input2 = fopen("char2.txt","r");
+    FILE *input = fopen("char.txt","r");        //read file one
+    FILE *input2 = fopen("char2.txt","r");      //read file two
     FILE *output = NULL;
     char *ptr, *ptr2;
 
-    if((input == NULL)||(input2 == NULL)){
+    if((input == NULL)||(input2 == NULL)){      // check for the end of file
         printf("Can't find a File");
         exit(1);
     }
@@ -50,11 +50,11 @@ int main(){
     fwrite(ptr4, 1, 3, output);
 
 // done:
-    free(ptr);
+    free(ptr);      //free pointer
     free(ptr2);
     free(ptr3);
     free(ptr4);
-    fclose(input);
+    fclose(input);      //close file
     fclose(input2);
     fclose(output);
     return 0;
