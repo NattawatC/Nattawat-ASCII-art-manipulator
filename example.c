@@ -69,3 +69,16 @@ int main(){
     fclose(outfile);
     return 0;
 }
+
+//using loop
+    // for(int i = 0; i < strlen(ptr3); i++){
+    //     if (*ptr3 != *(ptr + i)){
+    //         fseek(outfile, 2, SEEK_SET);
+    //         fwrite(ptr3 + 5, 1, sizeof(ptr3) - 5, outfile);
+    //     }
+    //     fseek(outfile, 0, SEEK_END);
+    //     fprintf(outfile, "%c", *(ptr3 + i));
+    //     if (i > size2 - 3){
+    //         goto done;
+    //     }
+    // }
