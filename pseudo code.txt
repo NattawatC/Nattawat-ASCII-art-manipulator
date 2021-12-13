@@ -1,0 +1,47 @@
+Declare Filename
+	declare pointer1 open file1(char.txt) to be read:
+	declare pointer2 open file2(char2.txt) to be read:
+	declare pointer3(output) = NULL
+	declare 2 char pointers for some space
+			
+	if pointer1 and pointer2 == NULL
+		display(Can't find a file)
+		exit()
+
+	set pointer1 at at the end of the file
+	declare int(size) to collect size of file
+	set pointer1 back at the beginning of file
+
+	set pointer2 at at the end of the file
+	declare int(size2) to collect size of file
+	set pointer2 back at the beginning of file
+	
+	declare int(size_t) for sum of all file's size
+	
+	giving char pointer1 a memory of size
+	giving char pointer2 a memory if size2
+
+	declare int(arr1) to find the size of pointer1 (using fread) and collect char from file1 into pointer1
+	declare int(arr2) to find the size of pointer2 (using fread) and collect char from file2 into pointer2
+
+	if(arr1 != size) or (arr2 != size)
+		display error
+
+	declare char pointer3
+	giving char pointer3 a memory of size_t
+	copy memory from pointer1 into pointer3 with size of size_t
+	
+	declare char pointer4
+	giving char pointer4 a memory of size_t
+	copy memory from pointer2 into pointer4 with size of size_t
+
+	open file name(Final_char.txt) to write with pointer3(output)
+	write a file using pointer(fwrite)
+
+	free(pointer1)
+	free(pointer2)
+	free(pointer3)
+	free(pointer4)
+	close file1
+	close file2
+	close output
