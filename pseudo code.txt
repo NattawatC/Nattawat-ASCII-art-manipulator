@@ -38,12 +38,7 @@ Declare Filename
 	open file name(Final_char.txt) and write with pointer3(output)
 	write a file using pointer(fwrite)
 
-	free(pointer1)
-	free(pointer2)
-	free(pointer3)
-	free(pointer4)
-	close file1
-	close file2
-	close output
+	free all pointer
+	close all file
 
 End code
