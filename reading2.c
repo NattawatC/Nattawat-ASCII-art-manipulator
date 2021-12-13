@@ -2,12 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct Image{       //still don't know how to use this!!
-    size_t height;
-    size_t width;
-    char* data;
-};
-
 int main(){
     FILE *input = fopen("char.txt","r");
     FILE *input2 = fopen("char2.txt","r");
@@ -64,4 +58,4 @@ int main(){
     fclose(input2);
     fclose(output);
     return 0;
-} 
+}
