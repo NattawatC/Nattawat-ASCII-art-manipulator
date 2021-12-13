@@ -40,7 +40,7 @@ int main(){
     ptr4 = (char*)malloc(size_t);
     memcpy(ptr4, ptr2, size_t);      //copy content ptr2 into ptr3 + 10(new_dest)
 
-//<still wrong>
+//<still need to be fix>
     output = fopen("Final_char.txt", "w");     //new file to write
     fwrite(ptr3, 1, 2, output);     //putting fisrt 2 char
     fwrite(ptr4, 1, 3, output);     //putting seconmd char
