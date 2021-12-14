@@ -9,7 +9,7 @@ int main(){
     char *ptr, *ptr2;
 
     if((input == NULL)||(input2 == NULL)){      // check for the end of file
-        printf("Can't find a File");
+        printf("Can't find a File"); 
         exit(1);
     }
 
