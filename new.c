@@ -16,7 +16,7 @@ int main(){
         exit(1);
     }
 // FILE 1
-    fgets(line, sizeof(line), input);
+    fgets(line, sizeof(line), input);       //find height of the file1
     for(int i = 0; i < strlen(line); i++){
         if (i == '\n'){
             break;
@@ -26,7 +26,7 @@ int main(){
         }
     }
 
-    fgets(line, sizeof(line), input);
+    fgets(line, sizeof(line), input);       //find width of the file1
     for(int i = 0; i < strlen(line); i++){
         if (i == '\n'){
             break;
@@ -38,9 +38,7 @@ int main(){
 
 // FILE 2
     char line2[50];
-
-
-    fgets(line2, sizeof(line2), input2);
+    fgets(line2, sizeof(line2), input2);        //find height of the file2
     for(int i = 0; i < strlen(line2); i++){
         if (i == '\n'){
             break;
@@ -50,7 +48,7 @@ int main(){
         }
     }
 
-    fgets(line2, sizeof(line2), input2);
+    fgets(line2, sizeof(line2), input2);        //find width of the file2
     for(int i = 0; i < strlen(line2); i++){
         if (i == '\n'){
             break;
@@ -60,47 +58,43 @@ int main(){
         }
     }
 
-    int height_n = height - '0';
-    int width_n = width - '0';
+    int height_n = height - '0';        //change char into int for height1
+    int width_n = width - '0';      //change char into int for width1
 
-    int height_n2 = height2 - '0';
-    int width_n2 = width2 - '0';
+    int height_n2 = height2 - '0';      //change char into int for height2
+    int width_n2 = width2 - '0';        //change char into int for width2
 
-    int size = height_n * width_n;
-    int size2 = height_n2 * width_n2;
+    int size = height_n * width_n;      //get size of the file1
+    int size2 = height_n2 * width_n2;       //get the size of file2
 
-    int newline = height_n - 1;
-    int newline2 = height_n2- 1;
+    int newline = height_n - 1;     //find how many newline in file1
+    int newline2 = height_n2- 1;        //find how many newline in file1
 
     ptr = (char*)malloc(size);
     ptr2 = (char*)malloc(size2);
 
-    int p_size = fread(ptr, 1, size + newline, input);
-    int p_size2 = fread(ptr2, 1, size2 + newline2, input2);
+    fread(ptr, 1, size + newline, input);      //copy content from file1 into ptr
+    fread(ptr2, 1, size2 + newline2, input2);     //copy content from file2 into ptr2
 
     char *ptr3;
-    ptr3 = (char*)malloc(p_size);
+    ptr3 = (char*)malloc(size);     
     for(int i = 0; i <= size; i++){
-        if (*(ptr + i) == '\n'){
+        if (*(ptr + i) == '\n'){        //get rid of newline
             *(ptr + i) = 0;
         }
-        memcpy(&ptr3[i], &ptr[i], size);
+        memcpy(&ptr3[i], &ptr[i], size);        //copy content from ptr into ptr3
     }
 
     char *ptr4;
     ptr4 = (char*)malloc(size2);
     for(int i = 0; i <= size2; i++){
-        if (*(ptr2 + i) == '\n'){
+        if (*(ptr2 + i) == '\n'){       //get rid of newline
             *(ptr2 + i) = 0;
         }
-        memcpy(&ptr4[i], &ptr2[i], size2);
+        memcpy(&ptr4[i], &ptr2[i], size2);      //copy content from ptr2 into ptr4
     }
 
-    // for(int i = 0; i <= size; i++){
-    //     printf("%c", *(ptr3 + i));
-    // }
-
-    output = fopen("Final_char.txt", "w");
+    output = fopen("Final_char.txt", "w");      //writing a new file
     fwrite(ptr3, 1, 2, output);
     fwrite(ptr4, 1, 3, output);
     fputc('\n', output);
@@ -110,6 +104,12 @@ int main(){
     fprintf(output, "  ");
     fwrite(ptr4 + 8, 1, 3, output);
     
-
-
+    free(ptr);      //free pointer
+    free(ptr2);
+    free(ptr3);
+    free(ptr4);
+    fclose(input);      //close file
+    fclose(input2);
+    fclose(output);
+    return 0;
 }
