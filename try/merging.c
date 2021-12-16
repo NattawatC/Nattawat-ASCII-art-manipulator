@@ -43,7 +43,7 @@ int main(){
 //<still need to be fix>
     output = fopen("Final_char.txt", "w");     //new file to write
     fwrite(ptr3, 1, 2, output);     //putting fisrt 2 char
-    fwrite(ptr4, 1, 3, output);     //putting seconmd char
+    fwrite(ptr4, 1, 3, output);     //putting second char
     fwrite(ptr3 + 2, 1, 3, output);
     fwrite(ptr4, 1, 4, output);
     fprintf(output, "  ");
