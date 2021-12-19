@@ -95,14 +95,14 @@ int main(){
     }
 
     output = fopen("Final_char.txt", "w");      //writing a new file
-    fwrite(ptr3, 1, 2, output);
-    fwrite(ptr4, 1, 3, output);
+    fwrite(ptr3, 1, width_n, output);
+    fwrite(ptr4, 1, width_n2, output);
     fputc('\n', output);
-    fwrite(ptr3 + 3, 1, 2, output);
-    fwrite(ptr4 + 4, 1, 3, output);
+    fwrite(ptr3 + (width_n + 1), 1, width_n, output);
+    fwrite(ptr4 + (width_n2 + 1), 1, width_n2, output);
     fputc('\n', output);
     fprintf(output, "  ");
-    fwrite(ptr4 + 8, 1, 3, output);
+    fwrite(ptr4 + 8, 1, width_n2, output);
     
     free(ptr);      //free pointer
     free(ptr2);
