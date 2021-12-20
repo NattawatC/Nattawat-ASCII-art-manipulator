@@ -64,6 +64,8 @@ int main(){
     int height_n2 = height2 - '0';      //change char into int for height2
     int width_n2 = width2 - '0';        //change char into int for width2
 
+    int t_width = width_n + width_n2;
+
     int size = height_n * width_n;      //get size of the file1
     int size2 = height_n2 * width_n2;       //get the size of file2
 
@@ -82,32 +84,29 @@ int main(){
         if (*(ptr + i) == '\n'){        //get rid of newline
             *(ptr + i) = 0;
         }
-        memcpy(&ptr3[i], &ptr[i], size);        //copy content from ptr into ptr3
+        memcpy(&ptr3[i], &ptr[i], 1);        //copy content from ptr into ptr3
     }
 
-    char *ptr4;
-    ptr4 = (char*)malloc(size2);
-    for(int i = 0; i <= size2; i++){
-        if (*(ptr2 + i) == '\n'){       //get rid of newline
-            *(ptr2 + i) = 0;
+    for(int i = size + 1; i <= size2 + size + 3; i++){      //put content from file2 in ptr3
+        if (*(ptr2 + (i - (size + 1))) == '\n'){       
+            *(ptr2 + (i - (size + 1))) = 0;
         }
-        memcpy(&ptr4[i], &ptr2[i], size2);      //copy content from ptr2 into ptr4
+        memcpy(&ptr3[i], &ptr2[i - (size + 1)], 1);     
     }
 
     output = fopen("Final_char.txt", "w");      //writing a new file
     fwrite(ptr3, 1, width_n, output);
-    fwrite(ptr4, 1, width_n2, output);
+    fwrite(ptr3 + t_width, 1, width_n2, output);
     fputc('\n', output);
     fwrite(ptr3 + (width_n + 1), 1, width_n, output);
-    fwrite(ptr4 + (width_n2 + 1), 1, width_n2, output);
+    fwrite(ptr3 + (width_n2 + 2), 1, width_n2, output);
     fputc('\n', output);
     fprintf(output, "  ");
-    fwrite(ptr4 + 8, 1, width_n2, output);
+    fwrite(ptr3 + (width_n2 + 2), 1, width_n2, output);
     
     free(ptr);      //free pointer
     free(ptr2);
     free(ptr3);
-    free(ptr4);
     fclose(input);      //close file
     fclose(input2);
     fclose(output);
