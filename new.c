@@ -69,6 +69,8 @@ int main(){
     int size = height_n * width_n;      //get size of the file1
     int size2 = height_n2 * width_n2;       //get the size of file2
 
+    int t_size = size + size2;
+
     int newline = height_n - 1;     //find how many newline in file1
     int newline2 = height_n2- 1;        //find how many newline in file1
 
@@ -87,7 +89,7 @@ int main(){
         memcpy(&ptr3[i], &ptr[i], 1);        //copy content from ptr into ptr3
     }
 
-    for(int i = size + 1; i <= size2 + size + 3; i++){      //put content from file2 in ptr3
+    for(int i = size + 1; i <= t_size + width_n2; i++){      //put content from file2 in ptr3
         if (*(ptr2 + (i - (size + 1))) == '\n'){       
             *(ptr2 + (i - (size + 1))) = 0;
         }
