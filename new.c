@@ -89,11 +89,13 @@ int main(){
         memcpy(&ptr3[i], &ptr[i], 1);        //copy content from ptr into ptr3
     }
 
-    for(int i = size + 1; i <= t_size + width_n2; i++){      //put content from file2 in ptr3
-        if (*(ptr2 + (i - (size + 1))) == '\n'){       
-            *(ptr2 + (i - (size + 1))) = 0;
+    int n_start = size + 1;     //using the same pointer to collect file 2
+
+    for(int i = n_start; i <= t_size + width_n2; i++){      //put content from file2 in ptr3
+        if (*(ptr2 + (i - (n_start))) == '\n'){       
+            *(ptr2 + (i - (n_start))) = 0;
         }
-        memcpy(&ptr3[i], &ptr2[i - (size + 1)], 1);     
+        memcpy(&ptr3[i], &ptr2[i - (n_start)], 1);     
     }
 
     output = fopen("Final_char.txt", "w");      //writing a new file
