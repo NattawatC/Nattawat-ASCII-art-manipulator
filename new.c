@@ -92,7 +92,7 @@ int main(){
     int n_start = size + 1;     //using the same pointer to collect file 2
 
     for(int i = n_start; i <= t_size + width_n2; i++){      //put content from file2 in ptr3
-        if (*(ptr2 + (i - (n_start))) == '\n'){       
+        if (*(ptr2 + (i - (n_start))) == '\n'){
             *(ptr2 + (i - (n_start))) = 0;
         }
         memcpy(&ptr3[i], &ptr2[i - (n_start)], 1);     
