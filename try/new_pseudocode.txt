@@ -1,0 +1,49 @@
+Declare Filename
+	declare pointer1 open and read file1(char.txt):
+	declare pointer2 open and read file2(char2.txt):
+	declare pointer3(output) = NULL
+	declare 2 char pointers for some space
+    declare char(line) to keep text from the file
+    declare int(height and width) for first file
+    declare int(height and width) for second file
+			
+	if pointer1 and pointer2 == NULL
+		display(Can't find a file)
+		exit()
+
+    using fgets to take the first line from file1
+    and for loop to take only number
+    do it for height and width
+	
+    using fgets to take the first line from file2
+    and for loop to take only number
+    do it for height and width
+	
+	change char that get from using fgetc to integer(minus '0')
+    do it for both height and width of both file
+
+    find size by using height * width
+
+    get total file size by combine size and size2 together
+    
+    give a memory block a size of file1 to pointer(ptr) 
+    give a memory block a size of file2 to pointer(pointer2) 
+
+	find the size of pointer1 (using fread) and collect char from file1 into pointer1
+	find the size of pointer2 (using fread) and collect char from file2 into pointer2
+
+	declare char pointer3
+	giving char pointer3 a memory of size_t
+    for loop to copy memory from pointer1 into pointer3 with size of size_t
+    have condition to remove newline from text
+	
+	for loop to copy memory from pointer2 into pointer3 with size of size_t
+    condition to remove newline from text
+
+	open file name(Final_char.txt) and write with pointer3(output)
+	write a file using pointer(fwrite)
+
+	free all pointer
+	close all file
+
+End code
