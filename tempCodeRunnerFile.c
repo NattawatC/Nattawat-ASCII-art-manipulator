@@ -1,1 +1,1 @@
-memcpy(&ptr3[i], &ptr[i], 1)
+

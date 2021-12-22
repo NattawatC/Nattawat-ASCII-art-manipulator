@@ -82,6 +82,7 @@ int main(){
         max_newline = newline;
     }
 
+    
     ptr = (char*)malloc(size);
     ptr2 = (char*)malloc(size2);
 
@@ -93,61 +94,30 @@ int main(){
     int index_ptr3 = 0;
     int newline_n = 0;
     char *ptr3;
-    ptr3 = (char*)malloc(t_size);  
-    ptr3[0] = NULL;
-    // printf("%d", strlen(ptr3)); 
-    for (int line = 0; line < max_newline; ++line){
-        if (strlen(ptr3) < t_width){
-            int start = width_n * line;
-            for (int c1 = 0; c1 < width_n; ++c1){
-                ptr3[start + c1] = ptr[c1];
+    ptr3 = (char*)malloc(size);   
+    for (int i = 0; i <= max_newline; i++){
+        for(int j = 0; j <= width_n; j++){
+            if (j == width_n){
+                for(int k = 0; k <= width_n2; k++){
+                    memcpy(&ptr3[index_ptr3++], &ptr2[index_ptr2++], 1);        //ptr3[index_ptr3++] == ptr2[index_ptr2++];
+                }
+                index_ptr1++;
             }
-
-            int start2 = start + width_n;
-            for (int c2 = 0; c2 < width_n2; ++c2){
-                ptr3[start2 + c2] = ptr2[c2];
-            }
-        }
-
-        else if (strlen(ptr3) == t_width){
-            int start = width_n * 2 + line;
-            for (int c1 = 0; c1 < width_n; ++c1){
-                ptr3[start + c1] = ptr[c1];
-            }
-
-            int start2 = start + width_n;
-            for (int c2 = 0; c2 < width_n2; ++c2){
-                ptr3[start2 + c2] = ptr2[c2];
-            }
-        }
-
-        else if(strlen(ptr) > t_width){
-            int start = width_n * 4 + line;
-            for (int c1 = 0; c1 < width_n; ++c1){
-                ptr3[start + c1] = ptr[c1];
-            }
-
-            int start2 = start + width_n;
-            for (int c2 = 0; c2 < width_n2; ++c2){
-                ptr3[start2 + c2] = ptr2[c2];
-            }
-        }
+            else{
+                memcpy(&ptr3[index_ptr3++], &ptr[index_ptr1++], 1);     //ptr3[index_ptr3++] == ptr[index_ptr1];
+            }       
+        }   
     }
 
-    printf("%d", strlen(ptr3));
-    for(int i = 0; i < 10;i++){
-        printf("%c", *(ptr3 + i));
+    output = fopen("Final_char.txt", "w");      //writing a new file
+    for(int i = 0; i <= index_ptr3; i++){
+        if(*(ptr3 + i) == '\0'){
+            fprintf(output, " ");
+        }
+        else{
+            fprintf(output, "%c", *(ptr3 + i));
+        }
     }
-
-    // output = fopen("Final_char.txt", "w");      //writing a new file
-    // for(int i = 0; i <= index_ptr3; i++){
-    //     if(*(ptr3 + i) == '\0'){
-    //         fprintf(output, " ");
-    //     }
-    //     else{
-    //         fprintf(output, "%c", *(ptr3 + i));
-    //     }
-    // }
 
     free(ptr);      //free pointer
     free(ptr2);
