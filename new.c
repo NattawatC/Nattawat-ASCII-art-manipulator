@@ -73,13 +73,13 @@ int main(){
 
     int newline = height_n - 1;     //find how many newline in file1
     int newline2 = height_n2- 1;        //find how many newline in file2
-    int max_newline;
+    int max_line;
 
     if(newline < newline2){
-        max_newline = newline2;
+        max_line = newline2;
     }
     else{
-        max_newline = newline;
+        max_line = newline;
     }
 
     ptr = (char*)malloc(size);
@@ -88,16 +88,10 @@ int main(){
     fread(ptr, 1, size + newline, input);      //copy content from file1 into ptr
     fread(ptr2, 1, size2 + newline2, input2);     //copy content from file2 into ptr2
     
-    int index_ptr1 = 0;
-    int index_ptr2 = 0;
-    int index_ptr3 = 0;
-    int newline_n = 0;
-    char *ptr3;
-    ptr3 = (char*)malloc(t_size);  
-    ptr3[0] = NULL;
-    // printf("%d", strlen(ptr3)); 
-    for (int line = 0; line < max_newline; ++line){
-        if (strlen(ptr3) < t_width){
+    char* ptr3;
+    ptr3 = (char*)malloc(t_size + max_line);
+    for (int line = 0; line < max_line; ++line){
+        if(line == 0){
             int start = width_n * line;
             for (int c1 = 0; c1 < width_n; ++c1){
                 ptr3[start + c1] = ptr[c1];
@@ -108,9 +102,8 @@ int main(){
                 ptr3[start2 + c2] = ptr2[c2];
             }
         }
-
-        else if (strlen(ptr3) == t_width){
-            int start = width_n * 2 + line;
+        if (strlen(ptr3) == t_width){
+            int start = strlen(ptr3);
             for (int c1 = 0; c1 < width_n; ++c1){
                 ptr3[start + c1] = ptr[c1];
             }
@@ -121,8 +114,8 @@ int main(){
             }
         }
 
-        else if(strlen(ptr) > t_width){
-            int start = width_n * 4 + line;
+        if (strlen(ptr3) > t_width){
+            int start = strlen(ptr) * 2;
             for (int c1 = 0; c1 < width_n; ++c1){
                 ptr3[start + c1] = ptr[c1];
             }
@@ -135,19 +128,17 @@ int main(){
     }
 
     printf("%d", strlen(ptr3));
-    for(int i = 0; i < 10;i++){
+    for(int i = 0; i < 15;i++){
         printf("%c", *(ptr3 + i));
     }
 
-    // output = fopen("Final_char.txt", "w");      //writing a new file
-    // for(int i = 0; i <= index_ptr3; i++){
-    //     if(*(ptr3 + i) == '\0'){
-    //         fprintf(output, " ");
-    //     }
-    //     else{
-    //         fprintf(output, "%c", *(ptr3 + i));
-    //     }
-    // }
+    output = fopen("Final_char.txt", "w");      //writing a new file
+    fwrite(ptr3, 1, t_width, output);
+    fprintf(output, "\n");
+    fwrite(ptr3 + t_width, 1, t_width, output);
+    fprintf(output, "\n");
+    fprintf(output, "  ");
+    fwrite(ptr3 + 12, 1, width_n2, output);
 
     free(ptr);      //free pointer
     free(ptr2);
