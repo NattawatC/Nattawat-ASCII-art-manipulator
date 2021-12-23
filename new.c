@@ -82,53 +82,79 @@ int main(){
         max_line = newline;
     }
 
+    int index_ptr = 0;
+    int index_ptr2 = 0;
     ptr = (char*)malloc(size);
     ptr2 = (char*)malloc(size2);
 
     fread(ptr, 1, size + newline, input);      //copy content from file1 into ptr
     fread(ptr2, 1, size2 + newline2, input2);     //copy content from file2 into ptr2
     
+    for (int i = 0; i < size + 1; i++){
+        if (*(ptr + i) == '\n'){
+            *(ptr + i) = 0;
+        }
+        ptr[i] = ptr[i];
+    }
+
+    for (int i = 0; i < size2 + 1; i++){
+        if (*(ptr2 + i) == '\n'){
+            *(ptr2 + i) = 0;
+        }
+        ptr2[i] = ptr2[i];
+    }
+
     char* ptr3;
     ptr3 = (char*)malloc(t_size + max_line);
+
     for (int line = 0; line < max_line; ++line){
+
+        if ((ptr[index_ptr] == '\0')){
+            ptr[index_ptr] = ' ';
+        } 
+
         if(line == 0){
             int start = width_n * line;
             for (int c1 = 0; c1 < width_n; ++c1){
-                ptr3[start + c1] = ptr[c1];
+                ptr3[start + c1] = ptr[index_ptr++];
             }
 
             int start2 = start + width_n;
             for (int c2 = 0; c2 < width_n2; ++c2){
-                ptr3[start2 + c2] = ptr2[c2];
+                ptr3[start2 + c2] = ptr2[index_ptr2++];
             }
         }
-        if (strlen(ptr3) == t_width){
+
+        else if (strlen(ptr3) == t_width){
             int start = strlen(ptr3);
             for (int c1 = 0; c1 < width_n; ++c1){
-                ptr3[start + c1] = ptr[c1];
+                ptr3[start + c1] = ptr[index_ptr++];
             }
 
             int start2 = start + width_n;
             for (int c2 = 0; c2 < width_n2; ++c2){
-                ptr3[start2 + c2] = ptr2[c2];
+                ptr3[start2 + c2] = ptr2[index_ptr2++];
             }
         }
 
-        if (strlen(ptr3) > t_width){
-            int start = strlen(ptr) * 2;
+        if (strlen(ptr3) > t_width){ 
+            int start = t_width * 2;
             for (int c1 = 0; c1 < width_n; ++c1){
-                ptr3[start + c1] = ptr[c1];
+                if (ptr[index_ptr] == '\0'){
+                    ptr[index_ptr] = ' ';
+                }
+                ptr3[start + c1] = ptr[index_ptr++];
             }
-
             int start2 = start + width_n;
-            for (int c2 = 0; c2 < width_n2; ++c2){
-                ptr3[start2 + c2] = ptr2[c2];
+            for (int c2 = 0; c2 < t_width; ++c2){
+                ptr3[start2 + c2] = ptr2[index_ptr2++];
             }
         }
+        index_ptr++;
+        index_ptr2++;
     }
 
-    printf("%d", strlen(ptr3));
-    for(int i = 0; i < 15;i++){
+    for(int i = 0; i < 20;i++){
         printf("%c", *(ptr3 + i));
     }
 
@@ -137,8 +163,8 @@ int main(){
     fprintf(output, "\n");
     fwrite(ptr3 + t_width, 1, t_width, output);
     fprintf(output, "\n");
-    fprintf(output, "  ");
-    fwrite(ptr3 + 12, 1, width_n2, output);
+    fwrite(ptr3 + (t_width * 2), 1, width_n, output);
+    fwrite(ptr3 + (t_width * 2) + width_n2, 1, width_n2, output);
 
     free(ptr);      //free pointer
     free(ptr2);
